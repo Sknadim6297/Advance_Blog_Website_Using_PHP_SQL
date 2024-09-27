@@ -8,24 +8,25 @@ if (isset($_POST['login'])) {
   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
   $pass = $_POST['pass'];
 
-  $sql = "SELECT * FROM `users` WHERE email='$email'";
+  // Check if the user is an admin
+  $sql = "SELECT * FROM `users` WHERE email='$email' AND role='admin'";
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
 
-
     if (password_verify($pass, $row['password'])) {
-      echo "Password matched";
       $_SESSION['username'] = $row['username'];
-      $_SESSION['id']=$row['id'];
-      header('location:Dashboard.php');
+      $_SESSION['id'] = $row['id'];
+      echo "<script>alert('Login Successful')
+      window.location.href='Dashboard.php';
+      </script>";
       exit;
     } else {
       echo "<script>alert('Password did not match')</script>";
     }
   } else {
-    echo "<script>alert('No user found with this email')</script>";
+    echo "<script>alert('No admin found with this email')</script>";
   }
 }
 ?>
