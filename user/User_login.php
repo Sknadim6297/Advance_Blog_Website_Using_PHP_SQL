@@ -4,28 +4,34 @@ include '../connection.php';
 session_start();
 
 if (isset($_POST['login'])) {
-  $email = $_POST['email'];
-  $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-  $pass = $_POST['pass'];
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $pass = $_POST['pass'];
 
+    $sql = "SELECT * FROM `user2` WHERE email='$email' AND role='user'";
+    $result = mysqli_query($conn, $sql);
 
-  $sql = "SELECT * FROM `user2` WHERE email='$email' AND role='user'";
-  $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
 
-  if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
+        if (password_verify($pass, $row['password'])) {
+            $_SESSION['login_username'] = $row['username'];
+            $_SESSION['login_id'] = $row['id'];
 
-    if (password_verify($pass, $row['password'])) {
-      $_SESSION['login_username'] = $row['username'];
-      $_SESSION['login_id'] = $row['id'];
-      header('Location: ../Home.php');
-      exit;
+      
+            $cookie_lifetime = 86400; 
+            setcookie("login_username", $row['username'], time() + $cookie_lifetime, "/");
+            setcookie("login_id", $row['id'], time() + $cookie_lifetime, "/");
+
+            // Redirect to home page
+            header('Location: ../Home.php');
+            exit;
+        } else {
+            echo "<script>alert('Password did not match')</script>";
+        }
     } else {
-      echo "<script>alert('Password did not match')</script>";
+        echo "<script>alert('User not found')</script>";
     }
-  } else {
-    echo "<script>alert('No user found with this email')</script>";
-  }
 }
 ?>
 

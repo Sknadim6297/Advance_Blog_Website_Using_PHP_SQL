@@ -18,6 +18,11 @@ if (isset($_POST['login'])) {
     if (password_verify($pass, $row['password'])) {
       $_SESSION['username'] = $row['username'];
       $_SESSION['id'] = $row['id'];
+
+      $cookie_lifetime = 86400; 
+      setcookie("login_username", $row['username'], time() + $cookie_lifetime, "/");
+      setcookie("login_id", $row['id'], time() + $cookie_lifetime, "/");
+
       echo "<script>alert('Login Successful')
       window.location.href='Dashboard.php';
       </script>";

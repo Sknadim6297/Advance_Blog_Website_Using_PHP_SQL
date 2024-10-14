@@ -13,7 +13,7 @@
 <body>
     <div class="flex justify-between items-center p-4 h-14 mx-20 mt-2">
         <!-- Logo -->
-        <div class="font-bold text-3xl">Sk.Blog</div>
+        <div class="font-bold text-3xl">Sk.Blogs</div>
 
         <!-- Search bar -->
         <div class="relative w-1/3 " >
@@ -32,11 +32,8 @@
                 </button>
                 <div id="settingsDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Posts</a>
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Categories</a>
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Authors</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Register</a>
                 </div>
             </div>
 
@@ -48,7 +45,7 @@
                 <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                     <a href="../../../PHP Projects/SimpleLoginSignup/Dashboard.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin </a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    <a href="user/User_logout.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
                 </div>
             </div>
         </div>
